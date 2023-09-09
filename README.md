@@ -7,7 +7,7 @@ implementation SAC algorithm on mojoco gym
 
 implementation SAC algorithm on ROS
 
-doc  : 
+doc  : https://drive.google.com/file/d/1qk2z0SLX5Xbv4DnqE7Cr7sdiQLTytxOU/view?usp=sharing
 
 ## amirmmv_bipedrobot_pkg
 
