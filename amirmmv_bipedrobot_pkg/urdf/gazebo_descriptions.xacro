@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<robot 
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/amirmmv_bipedrobot_ns</robotNamespace>
+         </plugin>
+    </gazebo>
+    <gazebo>
+        <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+            <frameName>map</frameName>
+            <bodyName>base_link</bodyName>
+            <topicName>/amirmmv_bipedrobot_ns/odom</topicName>
+            <updateRate>100.0</updateRate>
+        </plugin>
+    </gazebo>
+    <!-- imu sensor -->
+    <gazebo reference="imu_link">
+        <gravity>true</gravity>
+        <sensor name="imu_sensor" type="imu">
+            <always_on>true</always_on>
+            <update_rate>100</update_rate>
+            <visualize>true</visualize>
+            <topic>/amirmmv_bipedrobot_ns/Mysensor/imu</topic>
+            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <topicName>/amirmmv_bipedrobot_ns/Mysensor/imu</topicName>
+                <bodyName>imu_link</bodyName>
+                <updateRateHZ>10.0</updateRateHZ>
+                <gaussianNoise>0.0</gaussianNoise>
+                <xyzOffset>0 0 0</xyzOffset>
+                <rpyOffset>0 0 0</rpyOffset>
+                <frameName>imu_link</frameName>
+            </plugin>
+            <pose>0 0 0 0 0 0</pose>
+        </sensor>
+    </gazebo>
+
+<!-- World -->
+    <gazebo reference="world"></gazebo>
+    <!-- Map -->
+    <gazebo reference="map"></gazebo>
+    <!-- Base -->
+    <gazebo reference="base_link"></gazebo>
+    <!-- IMU -->
+    <gazebo reference="imu_link"></gazebo>
+    <!-- Body-->
+    <gazebo reference="base_footprint">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Red</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <!-- Left Leg -->
+    <gazebo reference="l_hip_yaw_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="l_hip_roll_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="l_hip_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="l_knee_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="l_ankle_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Blue</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>					
+    <gazebo reference="l_ankle_roll_link"><!--  Edited -->
+         <kp>100000.0</kp>
+        <kd>100.0</kd>
+        <collision names="collision_l_ankle_roll_link">
+        	<surface>
+        		<friction>
+        			<ode>
+                                        <mu>0.7</mu>
+                                        <mu2>0.7</mu2>
+        			</ode>
+        		</friction>
+        	</surface>
+        </collision>	
+        <!--  Edited <mu1>1.5</mu1> -->
+        <!--  Edited <mu2>1.5</mu2> -->
+        <!--<maxContacts>30</maxContacts>-->
+        <fdir1>1 1 0</fdir1>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <!-- Right Leg -->
+    <gazebo reference="r_hip_yaw_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+   <gazebo reference="r_hip_roll_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="r_hip_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="r_knee_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Grey</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="r_ankle_pitch_link">
+        <mu1>0.2</mu1>
+        <mu2>0.2</mu2>
+        <material>Gazebo/Blue</material>
+        <selfCollide>false</selfCollide>
+    </gazebo>
+    <gazebo reference="r_ankle_roll_link">
+            <collision names="collision_l_ankle_roll_link">
+        	<surface>
+        		<friction>
+        			<ode>
+                                        <mu>0.7</mu>
+                                        <mu2>0.7</mu2>
+        			</ode>
+        		</friction>
+        	</surface>
+        </collision>
+        <kp>100000.0</kp>
+        <kd>100.0</kd>
+        <!--  Edited <mu1>1.5</mu1> -->
+        <!--  Edited <mu2>1.5</mu2> -->
+        <!--<maxContacts>30</maxContacts>-->
+        <fdir1>1 1 0</fdir1>
+         <maxVel>1.0</maxVel> 
+        <minDepth>0.0001</minDepth>
+        <material>Gazebo/Red</material>
+    </gazebo>
+</robot>

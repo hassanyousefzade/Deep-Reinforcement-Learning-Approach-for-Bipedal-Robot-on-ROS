@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="position_controller" default="true"/>
+
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find amirmmv_bipedrobot_pkg)/world/empty.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Loading the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find amirmmv_bipedrobot_pkg)/urdf/main_urdf.xacro'" />
+  
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model amirmmv_bipedrobot -z 0.764 -param robot_description"/>
+  <node pkg="amirmmv_bipedrobot_pkg" type="amirmmv_jointdatalogger_node" name="amirmmv_jointdatalogger_node"/>
+  <!-- Calling ros_control launch file -->
+  <group if ="$(arg position_controller)">
+    <include file="$(find amirmmv_bipedrobot_pkg)/launch/position_controller.launch" />
+  </group>
+</launch>

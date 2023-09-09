@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot name="AmirMmv_BipedRobot_pkg"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="pi" value="3.141592654"/>
+    <!-- Import xacro files -->
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/materials.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/visual_descriptions.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/inertia.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/transmissions.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/right_leg.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/left_leg.xacro" />
+    <xacro:include filename="$(find amirmmv_bipedrobot_pkg)/urdf/gazebo_descriptions.xacro" />
+
+    <link name="base_link"></link>
+    <joint name="base_fixed" type="fixed">
+        <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+    </joint>
+    <!-- base_link -->
+    <link name="base_footprint">
+        <visual>
+            <xacro:insert_mesh_base_link />
+        </visual>
+        <collision>
+            <xacro:insert_mesh_base_link />
+        </collision>
+        <inertial>
+            <xacro:insert_inertia_base_link />
+        </inertial>
+    </link>
+    <!-- imu joint  -->
+    <joint name="imu_fixed" type="fixed">
+        <origin xyz="0 0 0.45" rpy="0 0 0"/>
+        <parent link="base_footprint"/>
+        <child link="imu_link"/>
+    </joint>
+    <link name="imu_link"></link>
+    <!-- leg link -->
+    <xacro:right_leg parent="base_footprint" dxl_effort="10" dxl_speed="2"/>
+    <xacro:left_leg parent="base_footprint" dxl_effort="10" dxl_speed="2"/>
+</robot>
