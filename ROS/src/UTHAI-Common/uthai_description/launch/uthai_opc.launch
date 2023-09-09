@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find uthai_description)/urdf/uthai.xacro'" /> -->
+    <!-- send joint values -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="true"/>
+        <remap from="/joint_states" to="/robotis/uthai/joint_states" />
+        <!-- <rosparam param="source_list">["/robotis/uthai/joint_states"]</rosparam> -->
+    </node>
+    <!-- Combine joint values -->
+    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find uthai_description)/config/rviz_uthai_display.rviz" output="screen"/>
+</launch>
