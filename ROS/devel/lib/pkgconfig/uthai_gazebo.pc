@@ -1,0 +1,8 @@
+prefix=/home/hassan/catkin_ws/devel
+
+Name: uthai_gazebo
+Description: Description of uthai_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
