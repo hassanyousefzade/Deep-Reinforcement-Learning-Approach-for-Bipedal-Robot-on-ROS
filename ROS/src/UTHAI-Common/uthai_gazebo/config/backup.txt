@@ -1,0 +1,5 @@
+#  r_hip_roll_position:
+#    type: effort_controllers/JointPositionController
+#    joint: r_hip_roll_joint
+#    pid: {p: 100.0, i: 0.01, d: 0.0}
+

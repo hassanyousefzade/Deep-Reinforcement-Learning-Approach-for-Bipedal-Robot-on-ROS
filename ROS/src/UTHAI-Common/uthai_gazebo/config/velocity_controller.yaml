@@ -1,0 +1,70 @@
+uthai:
+   # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100
+  
+  # Velocity Controllers ---------------------------------------
+  
+  # Left Leg -----
+  l_hip_yaw_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_hip_yaw_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  l_hip_roll_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_hip_roll_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  l_hip_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_hip_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  l_knee_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_knee_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  l_ankle_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_ankle_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  l_ankle_roll_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: l_ankle_roll_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  # Right Leg -----
+
+  r_hip_yaw_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_hip_yaw_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  r_hip_roll_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_hip_roll_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  r_hip_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_hip_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  r_knee_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_knee_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  r_ankle_pitch_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_ankle_pitch_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
+
+  r_ankle_roll_velocity:
+    type: effort_controllers/JointVelocityController
+    joint: r_ankle_roll_joint
+    pid: {p: 0.5, i: 0.0, d: 0.0}
